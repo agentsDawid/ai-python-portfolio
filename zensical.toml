@@ -13,6 +13,7 @@ nav = [
     { "Projects overview" = "projects/index.md" },
     # PROJECT-NAV:START
 
+    { "TIA Rename Assistant" = "projects/12 - tia-rename-assistant/index.md" },
     { "Iris Dataset — Exploratory Data Analysis" = "projects/01 - iris_EDA/index.md" },
     { "Half-Marathon Predictor — AI & Machine Learning" = "projects/05 - app_half-marathon-aprox/index.md" },
     { "NaszGPT — Socratic Chatbot" = "projects/03 - chatbot_sokratesa/index.md" },
@@ -20,7 +21,6 @@ nav = [
     { "Video & Audio Summarizer" = "projects/07 - app_video_audio_summary/index.md" },
     { "Find Your Tribe — ML Group Matcher" = "projects/04 - app_find-your-tribe/index.md" },
     { "Titanic Dataset — Exploratory Data Analysis" = "projects/02 - titanic_EDA/index.md" },
-    { "TIA Rename Assistant" = "projects/12 - tia-rename-assistant/index.md" },
 
 # PROJECT-NAV:END
   ] },
