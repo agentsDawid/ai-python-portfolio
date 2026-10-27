@@ -1,0 +1,27 @@
+.md-typeset .streamlit-button {
+    background-color: #ff4b4b;
+    border-color: #ff4b4b;
+    color: #ffffff;
+}
+
+.md-typeset .streamlit-button:hover {
+    background-color: #d93636;
+    border-color: #d93636;
+    color: #ffffff;
+}
+
+.about-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.about-heading h1 {
+    margin: 0;
+}
+
+.about-heading img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}

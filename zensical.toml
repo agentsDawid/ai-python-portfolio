@@ -1,0 +1,70 @@
+[project]
+site_name = "AI & Python Portfolio"
+site_description = "Selected projects in Python, AI, automation, and software engineering."
+site_author = "Dawid Lechowicz"
+extra_css = ["stylesheets/extra.css"]
+# Replace with your published GitHub Pages URL when you deploy, for example:
+# site_url = "https://YOUR_USERNAME.github.io/ai-python-portfolio/"
+
+nav = [
+  { "Home" = "index.md" },
+  { "Projects" = [
+    { "Projects overview" = "projects/index.md" },
+    # PROJECT-NAV:START
+
+    { "Iris Dataset — Exploratory Data Analysis" = "projects/01 - iris_EDA/index.md" },
+    { "Half-Marathon Predictor — AI & Machine Learning" = "projects/05 - app_half-marathon-aprox/index.md" },
+    { "NaszGPT — Socratic Chatbot" = "projects/03 - chatbot_sokratesa/index.md" },
+    { "Audio Editor by Transcription" = "projects/06 - app_edit_audio_by_transcription/index.md" },
+    { "Video & Audio Summarizer" = "projects/07 - app_video_audio_summary/index.md" },
+    { "Find Your Tribe — ML Group Matcher" = "projects/04 - app_find-your-tribe/index.md" },
+    { "Titanic Dataset — Exploratory Data Analysis" = "projects/02 - titanic_EDA/index.md" },
+    { "TIA Rename Assistant" = "projects/12 - tia-rename-assistant/index.md" },
+
+# PROJECT-NAV:END
+  ] },
+  { "About" = "about.md" },
+]
+
+[project.theme]
+variant = "modern"
+features = [
+  "navigation.tabs",
+  "navigation.tabs.sticky",
+  "navigation.sections",
+  "navigation.top",
+  "search.suggest",
+  "search.highlight",
+  "content.code.copy",
+]
+icon.logo = "lucide/cpu"
+
+[[project.theme.palette]]
+scheme = "slate"
+primary = "indigo"
+accent = "cyan"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "indigo"
+accent = "cyan"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to dark mode"
+
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/agentsDawid"
+name = "GitHub — My Projects"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/linkedin"
+link = "https://www.linkedin.com/in/dawid-lechowicz-888ba135/"
+name = "LinkedIn — Professional Profile"
+
+[[project.extra.social]]
+icon = "fontawesome/solid/envelope"
+link = "mailto:lechowicz.dawid@gmail.com"
+name = "Email — Contact Me"
