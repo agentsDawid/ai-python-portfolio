@@ -3,8 +3,9 @@ site_name = "AI & Python Portfolio"
 site_description = "Selected projects in Python, AI, automation, and software engineering."
 site_author = "Dawid Lechowicz"
 extra_css = ["stylesheets/extra.css"]
-# Replace with your published GitHub Pages URL when you deploy, for example:
-# site_url = "https://YOUR_USERNAME.github.io/ai-python-portfolio/"
+site_url = "https://agentsDawid.github.io/ai-python-portfolio/"
+repo_url = "https://github.com/agentsDawid/ai-python-portfolio"
+repo_name = "agentsDawid/ai-python-portfolio"
 
 nav = [
   { "Home" = "index.md" },
