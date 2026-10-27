@@ -12,7 +12,7 @@ categories:
 
 # NaszGPT — Socratic Chatbot
 
-[View on GitHub](https://github.com/agentsDawid/app_edit_audio_by_transcription){ .md-button .md-button--primary }
+[View on GitHub](https://github.com/agentsDawid/ChatBot_Socrates_GPT_Langfuse.git){ .md-button .md-button--primary }
 [Launch Streamlit App](https://chatbotsocratesgptlangfuse-byeeczpfsyzxwrtwvfkiwk.streamlit.app){ .md-button .streamlit-button }
 
 NaszGPT is an interactive chatbot designed to help users work toward answers through guided questions rather than immediately receiving a solution. Its default personality follows the Socratic approach: it asks follow-up questions, offers hints, and provides a direct explanation when the user needs additional help.

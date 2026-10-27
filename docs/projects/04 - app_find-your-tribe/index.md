@@ -15,8 +15,8 @@ categories:
 
 **Discover your group through machine learning.**
 
-[View on GitHub](https://github.com/YOUR_USERNAME/find-your-tribe){ .md-button .md-button--primary }
-[Launch Streamlit App](https://YOUR-APP.streamlit.app){ .md-button .streamlit-button }
+[View on GitHub](https://github.com/agentsDawid/find-your-tribe.git){ .md-button .md-button--primary }
+[Launch Streamlit App](https://find-your-tribe-ad.streamlit.app){ .md-button .streamlit-button }
 
 ![Find Your Tribe — application screenshot](files/find-your-tribe.jpg)
 
@@ -52,8 +52,3 @@ The application identifies statistical similarities in survey responses; it does
 ## Project files
 
 The app expects a saved clustering pipeline (`welcome_survey_clustering_pipeline_v2`), survey data (`welcome_survey_simple_v2.csv`) and cluster descriptions (`welcome_survey_cluster_names_and_descriptions_v2.json`). These resources must be available when the app runs.
-
-## Links
-
-- [GitHub repository](https://github.com/agentsDawid/find-your-tribe.git)
-- [Streamlit demo](https://find-your-tribe.streamlit.app)
