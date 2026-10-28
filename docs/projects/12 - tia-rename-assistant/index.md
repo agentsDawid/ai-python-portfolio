@@ -17,6 +17,12 @@ categories:
 
 TIA Rename Assistant is an experimental tool concept for making large-scale object-renaming tasks easier to plan and review in Siemens TIA Portal projects.
 
+## Application Preview
+
+![TIA Rename Assistant — project illustration](files/tia-rename-assistant.jpg)
+
+*Concept illustration of the planned object-renaming workflow, reference preservation, and validation process.*
+
 ## Problem
 
 Renaming hundreds of engineering objects manually is tedious and can introduce inconsistencies. In an engineering environment, a useful workflow must also account for references and make proposed changes reviewable before they are applied.
