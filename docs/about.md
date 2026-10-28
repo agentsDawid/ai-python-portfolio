@@ -11,7 +11,7 @@ description: "Automation engineer and technical leader exploring Python, softwar
        width="80" height="80">
 </div>
 
-**Automation Engineer | PLC Programmer | Technical Leader | Python & AI Enthusiast**
+**Software Tools & Automation Developer | Python & Applied AI | Industrial Automation Background**
 
 Hi, I'm Dawid.
 
