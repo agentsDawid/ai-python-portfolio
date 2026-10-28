@@ -34,7 +34,7 @@ The generated site is written to `site/`.
 ## Links
 
 - [GitHub profile](https://github.com/agentsDawid)
-- [LinkedIn](https://www.linkedin.com/in/dawid-lechowicz-888ba135/)
+- [LinkedIn](https://www.linkedin.com/in/dawid-lechowicz-dev/)
 
 ---
 
