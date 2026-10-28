@@ -45,4 +45,4 @@ I'm curious, motivated, and eager to keep developing my skills while applying th
 
 ---
 
-[GitHub](https://github.com/agentsDawid) · [LinkedIn](https://www.linkedin.com/in/dawid-lechowicz-888ba135/)
+[GitHub](https://github.com/agentsDawid) · [LinkedIn](https://www.linkedin.com/in/dawid-lechowicz-dev/)
