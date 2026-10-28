@@ -49,6 +49,7 @@ class Project:
     description: str
     date: date | None
     featured: bool
+    status: str
     categories: tuple[str, ...]
 
 
@@ -105,6 +106,9 @@ def load_projects() -> list[Project]:
             title = meta.get("title")
             description = meta.get("description")
             featured = meta.get("featured")
+            status = meta.get("status", "completed")
+            if isinstance(status, str):
+                status = status.strip().lower().replace("-", "_").replace(" ", "_")
             categories = meta.get("categories", [])
             project_date = parse_date(meta.get("date"), page)
 
@@ -112,6 +116,8 @@ def load_projects() -> list[Project]:
                 raise ValueError(f"Missing/non-text title in {page.relative_to(ROOT)}")
             if not isinstance(description, str) or not description.strip():
                 raise ValueError(f"Missing/non-text description in {page.relative_to(ROOT)}")
+            if status not in ("completed", "in_development"):
+                raise ValueError(f"status must be completed or in_development in {page.relative_to(ROOT)}")
             if not isinstance(featured, bool):
                 raise ValueError(f"featured must be true/false in {page.relative_to(ROOT)}")
             if not isinstance(categories, list) or any(not isinstance(item, str) for item in categories):
@@ -138,6 +144,7 @@ def load_projects() -> list[Project]:
                     description=description.strip(),
                     date=project_date,
                     featured=featured,
+                    status=status,
                     categories=tuple(item.strip() for item in categories if item.strip()),
                 )
             )
@@ -181,7 +188,10 @@ def render_cards(projects: list[Project], source_page: Path) -> str:
         link = link_from(source_page, project.page)
         title = markdown_safe(project.title)
         description = markdown_safe(project.description)
-        lines.extend([f"- **{title}**", "", "    ---", "", f"    {description}", ""])
+        lines.extend([f"- **{title}**", "", "    ---", ""])
+        if project.status == "in_development":
+            lines.extend(["    **Status: In Development**", ""])
+        lines.extend([f"    {description}", ""])
         if project.categories:
             topics = " · ".join(markdown_safe(category) for category in project.categories)
             lines.extend([f"    **Topics:** {topics}", ""])
@@ -190,13 +200,43 @@ def render_cards(projects: list[Project], source_page: Path) -> str:
     return "\n".join(lines)
 
 
+def render_home_featured(projects: list[Project], source_page: Path) -> str:
+    """Featured cards: completed first, development at the end if present."""
+    completed = [p for p in projects if p.status != "in_development"]
+    development = [p for p in projects if p.status == "in_development"]
+    sections = []
+    if completed:
+        sections.append(render_cards(completed, source_page))
+    if development:
+        sections.append("### In Development\n\n" + render_cards(development, source_page))
+    return "\n\n".join(sections) if sections else "No featured projects yet."
+
+
+def render_development_group(projects: list[Project], source_page: Path) -> str:
+    """Generate a category only when it contains projects."""
+    return "## In Development\n\n" + render_cards(projects, source_page) if projects else ""
+
+
 def render_nav(projects: list[Project]) -> str:
-    lines: list[str] = []
-    for project in projects:
+    """Generate TOML navigation: completed projects first, optional dev subgroup.
+
+    A missing development group is omitted altogether, including its label.
+    Keep navigation inside the existing PROJECT-NAV marker pair.
+    """
+    completed = [p for p in projects if p.status != "in_development"]
+    development = [p for p in projects if p.status == "in_development"]
+
+    def nav_item(project: Project, indent: str = "    ") -> str:
         relative = project.page.relative_to(DOCS).as_posix()
         title = json.dumps(project.title, ensure_ascii=False)
         target = json.dumps(relative, ensure_ascii=False)
-        lines.append(f"    {{ {title} = {target} }},")
+        return f"{indent}{{ {title} = {target} }},"
+
+    lines = [nav_item(p) for p in completed]
+    if development:
+        lines.append('    { "In Development" = [')
+        lines.extend(nav_item(p, indent="      ") for p in development)
+        lines.append('    ] },')
     return "\n".join(lines) if lines else "    # No project pages found."
 
 
@@ -215,10 +255,10 @@ def replace_section(
     return text[:start] + "\n\n" + body.rstrip() + "\n\n" + text[end:]
 
 
-def update_page(path: Path, sections: list[tuple[str, str, list[Project]]]) -> None:
+def update_page(path: Path, sections: list[tuple[str, str, str]]) -> None:
     text = path.read_text(encoding="utf-8")
-    for start_marker, end_marker, projects in sections:
-        text = replace_section(text, start_marker, end_marker, render_cards(projects, path), path)
+    for start_marker, end_marker, body in sections:
+        text = replace_section(text, start_marker, end_marker, body, path)
     path.write_text(text, encoding="utf-8", newline="\n")
 
 
@@ -281,19 +321,30 @@ def remove_obsolete_project_cards(path: Path) -> int:
 def main() -> int:
     try:
         all_projects = sort_projects(load_projects())
-        featured = [project for project in all_projects if project.featured]
-        other = [project for project in all_projects if not project.featured]
+        print(f"[generator] Using: {Path(__file__).resolve()}", flush=True)
+        for project in all_projects:
+            print(f"[generator] status={project.status:15s} featured={str(project.featured):5s} | {project.folder.name}", flush=True)
+        completed = [project for project in all_projects if project.status != "in_development"]
+        development = [project for project in all_projects if project.status == "in_development"]
+        featured_completed = [project for project in completed if project.featured]
+        featured_development = [project for project in development if project.featured]
+        other_completed = [project for project in completed if not project.featured]
 
         home = DOCS / "index.md"
         project_listing = PROJECTS_DIR / "index.md"
-        update_page(home, [(HOME_FEATURED_START, HOME_FEATURED_END, featured)])
-        update_page(
-            project_listing,
-            [
-                (LIST_FEATURED_START, LIST_FEATURED_END, featured),
-                (LIST_OTHER_START, LIST_OTHER_END, other),
-            ],
-        )
+        update_page(home, [
+            (HOME_FEATURED_START, HOME_FEATURED_END,
+             render_home_featured(featured_completed + featured_development, home)),
+        ])
+        other_body = render_cards(other_completed, project_listing) if other_completed else ""
+        development_body = render_development_group(development, project_listing)
+        if development_body:
+            other_body = (other_body + "\n\n" + development_body).strip()
+        update_page(project_listing, [
+            (LIST_FEATURED_START, LIST_FEATURED_END,
+             render_cards(featured_completed, project_listing) if featured_completed else ""),
+            (LIST_OTHER_START, LIST_OTHER_END, other_body),
+        ])
 
         # Remove stale manually-authored project cards left outside the markers.
         removed = remove_obsolete_project_cards(home)
@@ -306,8 +357,22 @@ def main() -> int:
         )
         config.write_text(config_text, encoding="utf-8", newline="\n")
 
+        # Validate that each generated output has the expected development section.
+        generated_home = home.read_text(encoding="utf-8")
+        generated_listing = project_listing.read_text(encoding="utf-8")
+        generated_nav = config.read_text(encoding="utf-8")
+        if development:
+            assert "## In Development" in generated_listing, "Missing Projects development section"
+            assert '{ "In Development" = [' in generated_nav, "Missing navigation development group"
+            if featured_development:
+                assert "### In Development" in generated_home, "Missing Home development section"
+        else:
+            assert "## In Development" not in generated_listing, "Unexpected Projects development section"
+            assert '{ "In Development" = [' not in generated_nav, "Unexpected navigation development group"
+
         print(
-            f"Generated project cards: {len(featured)} featured, {len(other)} other; "
+            f"Generated project cards: {len(featured_completed) + len(featured_development)} featured, "
+            f"{len(other_completed)} other, {len(development)} in development; "
             f"removed {removed} obsolete card(s)."
         )
         return 0

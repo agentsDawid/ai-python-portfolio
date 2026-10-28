@@ -3,6 +3,7 @@ title: "TIA Rename Assistant"
 description: "A planning and validation workflow for bulk-renaming engineering objects while preserving references."
 date: 2026-10-20
 featured: true
+status: in_development
 categories:
   - Python
   - Engineering Tools

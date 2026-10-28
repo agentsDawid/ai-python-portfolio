@@ -26,16 +26,6 @@ Selected projects from my work in applied AI, Python, and engineering software.
 
 <div class="grid cards" markdown>
 
-- **TIA Rename Assistant**
-
-    ---
-
-    A planning and validation workflow for bulk-renaming engineering objects while preserving references.
-
-    **Topics:** Python · Engineering Tools · Testing
-
-    [:octicons-arrow-right-24: View project](projects/12%20-%20tia-rename-assistant/index.md)
-
 - **Half-Marathon Predictor — AI & Machine Learning**
 
     ---
@@ -65,6 +55,24 @@ Selected projects from my work in applied AI, Python, and engineering software.
     **Topics:** Python · Streamlit · OpenAI API · Whisper · Pydub · FFmpeg
 
     [:octicons-arrow-right-24: View project](projects/07%20-%20app_video_audio_summary/index.md)
+
+</div>
+
+### In Development
+
+<div class="grid cards" markdown>
+
+- **TIA Rename Assistant**
+
+    ---
+
+    **Status: In Development**
+
+    A planning and validation workflow for bulk-renaming engineering objects while preserving references.
+
+    **Topics:** Python · Engineering Tools · Testing
+
+    [:octicons-arrow-right-24: View project](projects/12%20-%20tia-rename-assistant/index.md)
 
 </div>
 

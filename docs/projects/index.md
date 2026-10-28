@@ -8,16 +8,6 @@ Browse the portfolio by project. The cards below are generated from each project
 
 <div class="grid cards" markdown>
 
-- **TIA Rename Assistant**
-
-    ---
-
-    A planning and validation workflow for bulk-renaming engineering objects while preserving references.
-
-    **Topics:** Python · Engineering Tools · Testing
-
-    [:octicons-arrow-right-24: View project](12%20-%20tia-rename-assistant/index.md)
-
 - **Half-Marathon Predictor — AI & Machine Learning**
 
     ---
@@ -97,6 +87,24 @@ Browse the portfolio by project. The cards below are generated from each project
     **Topics:** Python · Data Analysis · Visualization
 
     [:octicons-arrow-right-24: View project](02%20-%20titanic_EDA/index.md)
+
+</div>
+
+## In Development
+
+<div class="grid cards" markdown>
+
+- **TIA Rename Assistant**
+
+    ---
+
+    **Status: In Development**
+
+    A planning and validation workflow for bulk-renaming engineering objects while preserving references.
+
+    **Topics:** Python · Engineering Tools · Testing
+
+    [:octicons-arrow-right-24: View project](12%20-%20tia-rename-assistant/index.md)
 
 </div>
 
